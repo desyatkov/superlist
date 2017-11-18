@@ -18,6 +18,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
+    "gulp-excel2json": "^1.0.5",
     "gulp-filter": "^3.0.1",
     "gulp-hash": "^4.0.1",
     "gulp-imagemin": "^3.4.0",
@@ -29,6 +30,7 @@
     "gulp-render-to-string": "^1.0.0",
     "gulp-sequence": "^0.4.6",
     "gulp-sort": "^2.0.0",
+    "gulp-spreadsheet2json": "^1.0.6",
     "gulp-watch": "^4.3.11",
     "gulp-webserver": "^0.9.1",
     "images-require-hook": "^1.0.3",
@@ -38,6 +40,8 @@
     "react-dom": "^15.4.2"
   },
   "dependencies": {
+    "gulp-js-xlsx": "^0.1.0",
+    "gulp-sheets2json": "^1.0.1",
     "through2": "^2.0.3"
   }
 }

@@ -12,6 +12,9 @@ import modules from "postcss-modules";
 import concat from "gulp-concat";
 import assets from "postcss-assets";
 import sort from "gulp-sort";
+import s2j from "gulp-sheets2json";
+import xls2json from "gulp-spreadsheet2json";
+import gulpXlsx from "gulp-js-xlsx";
 import sequence from "gulp-sequence";
 import renderToString from "gulp-render-to-string";
 import paginate from "gulp-paginate";
@@ -51,6 +54,39 @@ gulp.task("article-stats", () => {
       articleCount = stats.fileCount;
     })
   );
+});
+
+
+// gulp.task("bulid:json", function() {
+//   gulp
+//     .src(["xls/**/*"])
+//     .pipe(filter(file => file.path.match(/test/)))
+//     .pipe(
+//       xls2json({
+//         headRow: 1,
+//         valueRowStart: 2,
+//         trace: false
+//       })
+//     )
+//     .pipe(
+//       rename(path => {
+//         path.extname = ".json";
+//       })
+//     )
+//     .pipe(gulp.dest("./distxls"));
+// });
+//www.npmjs.com/package/gulp-js-xlsx
+https: gulp.task("bulid:json", function() {
+  gulp
+    .src(["xls/**/*"])
+    .pipe(filter(file => file.path.match(/test/)))
+    .pipe(gulpXlsx.run({ parseWorksheet: "tree" }))
+    .pipe(
+      rename(path => {
+        path.extname = ".json";
+      })
+    )
+    .pipe(gulp.dest("./distxls"));
 });
 
 gulp.task("articles", function() {
