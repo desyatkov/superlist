@@ -22,7 +22,6 @@ import imagemin from "gulp-imagemin";
 import replace from "./lib/plugins/replace";
 import stats from "./lib/plugins/stats";
 require("images-require-hook")([".svg", ".png", ".ico"], "/assets/img");
-
 const { Page } = require('./lib/components/page');
 const { Article } = require("./lib/components/article");
 const { PageIndex } = require("./lib/components/page-index");
@@ -56,28 +55,8 @@ gulp.task("article-stats", () => {
   );
 });
 
-
-// gulp.task("bulid:json", function() {
-//   gulp
-//     .src(["xls/**/*"])
-//     .pipe(filter(file => file.path.match(/test/)))
-//     .pipe(
-//       xls2json({
-//         headRow: 1,
-//         valueRowStart: 2,
-//         trace: false
-//       })
-//     )
-//     .pipe(
-//       rename(path => {
-//         path.extname = ".json";
-//       })
-//     )
-//     .pipe(gulp.dest("./distxls"));
-// });
-//www.npmjs.com/package/gulp-js-xlsx
-https: gulp.task("bulid:json", function() {
-  gulp
+gulp.task("bulid:json", function() {
+  return gulp
     .src(["xls/**/*"])
     .pipe(filter(file => file.path.match(/test/)))
     .pipe(gulpXlsx.run({ parseWorksheet: "tree" }))
@@ -86,25 +65,25 @@ https: gulp.task("bulid:json", function() {
         path.extname = ".json";
       })
     )
-    .pipe(gulp.dest("./distxls"));
+    .pipe(gulp.dest("./articles"));
 });
 
-gulp.task("articles", function() {
+gulp.task("articles", ["bulid:json"], function() {
   return gulp
     .src(["articles/**/*"])
-      .pipe(filter(file => file.path.match(/chartdata/)))
+      .pipe(filter(file => file.path.match(/test/)))
       .pipe(include())
       .pipe(sort({ asc: false }))
       .pipe(rename(path => {
-          console.log(path);
           path.basename += "-index";;
           path.extname = ".html";
-          // path.dirname = path.dirname.replace(/\d{4}\-\d{2}\-\d{2}\-/, "");
         }))
       .pipe(renderToString(Article,{ pageCount: CONSTANT }))
       .pipe(renderToString(Page))
       .pipe(gulp.dest("./dist"));
 });
+
+gulp.task("default", ["bulid:json", "articles"]);
 
 gulp.task("articles-images", function() {
   return gulp

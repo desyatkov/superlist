@@ -31,13 +31,15 @@
     "gulp-sequence": "^0.4.6",
     "gulp-sort": "^2.0.0",
     "gulp-spreadsheet2json": "^1.0.6",
+    "gulp-sync": "^0.1.4",
     "gulp-watch": "^4.3.11",
     "gulp-webserver": "^0.9.1",
     "images-require-hook": "^1.0.3",
     "postcss-assets": "^4.1.0",
     "postcss-modules": "^0.6.3",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "run-sequence": "^2.2.0"
   },
   "dependencies": {
     "gulp-js-xlsx": "^0.1.0",
